@@ -8,10 +8,6 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  final names = ['joao', 'anna', 'catarina', 'helena', 'luisa'];
-
-  final list = <String>[];
-
   final controller = TextEditingController();
 
   @override
@@ -20,39 +16,39 @@ class _HomeWidgetState extends State<HomeWidget> {
         appBar: AppBar(
           title: const Text('Home'),
         ),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                      child: TextField(
-                    controller: controller,
+        body: Center(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: Image.asset(
+                    'assets/imgs/background.png',
+                    fit: BoxFit.cover,
                   )),
-                  IconButton(
-                      onPressed: () {
-                        final text = controller.text;
-                        setState(() {
-                          list.add(text);
-                        });
-                        controller.clear();
-                      },
-                      icon: const Icon(Icons.add))
-                ],
+              Container(
+                color: Colors.black.withOpacity(0.6),
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
               ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: list.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    title: Text(list[index]),
-                  );
-                },
-              ),
-            ),
-          ],
+              SizedBox(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const FlutterLogo(
+                        textColor: Colors.white,
+                        size: 150,
+                        style: FlutterLogoStyle.horizontal,
+                      ),
+                      ElevatedButton(
+                          onPressed: () {}, child: const Text('Entrar no APP'))
+                    ]),
+              )
+            ],
+          ),
         ));
   }
 }
